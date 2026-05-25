@@ -1,0 +1,44 @@
+services:
+  # ── JSON Server API ───────────────────────────────────────────────────────────
+  - type: web
+    name: chaptr-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # ── Student App ───────────────────────────────────────────────────────────────
+  - type: web
+    name: chaptr-app
+    runtime: static
+    buildCommand: npm install -g pnpm && pnpm install && pnpm --filter app build
+    staticPublishPath: apps/app/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: chaptr-api
+          property: host
+
+  # ── Admin Dash ────────────────────────────────────────────────────────────────
+  - type: web
+    name: chaptr-dash
+    runtime: static
+    buildCommand: npm install -g pnpm && pnpm install && pnpm --filter dash build
+    staticPublishPath: apps/dash/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: chaptr-api
+          property: host

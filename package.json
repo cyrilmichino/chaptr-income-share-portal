@@ -1,0 +1,20 @@
+{
+  "name": "chaptr-demo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js",
+    "dev:app": "pnpm --filter app dev",
+    "dev:dash": "pnpm --filter dash dev",
+    "dev:api": "npx json-server db.json --port 3001"
+  },
+  "dependencies": {
+    "json-server": "^0.17.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

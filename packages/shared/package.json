@@ -1,0 +1,10 @@
+{
+  "name": "shared",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./api": "./src/api.js",
+    "./mock-data": "./src/mock-data.js",
+    "./utils": "./src/utils.js"
+  }
+}
